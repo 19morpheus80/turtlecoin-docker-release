@@ -1,0 +1,5 @@
+#!/bin/bash
+ME=${0##*/}
+
+MSG="Starting Docker container in the background" && echo $MSG && logger -t $ME $MSG
+docker run -d --rm --mount source=turtlecoin-data,target=/data turtlecoin-release $1

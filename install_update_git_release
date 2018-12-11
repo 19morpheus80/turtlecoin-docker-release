@@ -15,7 +15,7 @@ function install_binary () {
 
     if [ ! -f $BASE ]; then
       MSG="Didn't download $URL properly.  Where is $BASE?" && echo $MSG && logger -t $ME $MSG
-      exit 1	
+      exit 1
     fi
 
     if [ -d "$3" ]; then

@@ -2,10 +2,13 @@
 ME=${0##*/}
 
 MSG="Checking/Updating your local system" && echo $MSG && logger -t $ME $MSG
-sudo apt update  && sudo apt -y upgrade && sudo apt install -y wget jq nano
+sudo apt update  && sudo apt -y upgrade && sudo apt install -y wget jq
 
 MSG="Getting latest TurtleCoin binaries" && echo $MSG && logger -t $ME $MSG
-install_update_git_release
+./install_update_git_release
+
+MSG="Updating checkpoints file" && echo $MSG && logger -t $ME $MSG
+wget -P ./turtlecoin https://github.com/turtlecoin/checkpoints/raw/master/checkpoints.csv
 
 MSG="Building Docker image" && echo $MSG && logger -t $ME $MSG
 docker build -t turtlecoin-release .
