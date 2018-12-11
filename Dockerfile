@@ -1,6 +1,6 @@
 FROM ubuntu
 
 RUN apt update &&         \
-    apt upgrade           \
+    apt -y upgrade
 
 ADD ./turtlecoin /turtlecoin
