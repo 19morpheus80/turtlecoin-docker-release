@@ -1,0 +1,17 @@
+#!/bin/bash
+ME=${0##*/}
+
+MSG="Preparing/Updating system" && echo $MSG && logger -t $ME $MSG
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+sudo apt-get update
+apt-cache policy docker-ce
+
+MSG="Installing Docker" && echo $MSG && logger -t $ME $MSG
+sudo apt-get install -y docker-ce
+
+MSG="Adding user to docker group.  You will need to re-authenticate.." && echo $MSG && logger -t $ME $MSG
+sudo usermod -aG docker ${USER}
+su - ${USER}
+
+MSG="Docker installation script completed" && echo $MSG && logger -t $ME $MSG

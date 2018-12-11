@@ -1,0 +1,20 @@
+This is a series of docker files and related scripts I wrote.
+I share them in the hope that they are useful for someone else.
+
+Files included:
+
+docker-compose.yml          - for running the container as a service
+Dockerfile                  - to build the docker image
+docker_prep                 - updates your system using apt, then installs docker and adds your current user to the docker group
+installupdate_docker        - script downloads the latest turtlecoin binary release from github and (re)builds the docker image with it
+install_update_git_release  - script called by installupdate_docker (grabs the latest release from github)
+run_background_docker       - runs the docker image non-interactively.  probably shouldn't be used
+run_interactive_docker      - runs the docker image interactively.  could be useful for having a look around
+
+This should probably go like:
+
+1. ./docker_prep
+2. ./installupdate_docker
+3. docker-compose up -d
+
+Cheers, Morpheus aka 19morpheus80

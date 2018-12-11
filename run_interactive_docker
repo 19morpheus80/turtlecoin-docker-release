@@ -1,0 +1,6 @@
+#!/bin/bash
+ME=${0##*/}
+
+MSG="Starting Docker container interactively" && echo $MSG && logger -t $ME $MSG
+echo "Settings outside /data will not be saved! Type exit to finish session.
+docker run -it --rm --mount source=turtlecoin-data,target=/data turtlecoin-release

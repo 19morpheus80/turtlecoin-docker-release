@@ -1,0 +1,13 @@
+#!/bin/bash
+ME=${0##*/}
+
+MSG="Checking/Updating your local system" && echo $MSG && logger -t $ME $MSG
+sudo apt update  && sudo apt -y upgrade && sudo apt install -y wget jq nano
+
+MSG="Getting latest TurtleCoin binaries" && echo $MSG && logger -t $ME $MSG
+install_update_git_release
+
+MSG="Building Docker image" && echo $MSG && logger -t $ME $MSG
+docker build -t turtlecoin-release .
+
+MSG="Finished Updating" && echo $MSG && logger -t $ME $MSG

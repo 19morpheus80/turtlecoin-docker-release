@@ -1,0 +1,44 @@
+#!/bin/bash
+#script yoinked and adapted from user drmikecrowe posting at https://gist.github.com/steinwaywhw/a4cd19cda655b8249d908261a62687f8
+ME=${0##*/}
+
+function install_binary () {
+  URL=$(get_download_url $1 $2)
+  BASE=$(basename $URL)
+
+  MSG="Checking for release update" && echo $MSG && logger -t $ME $MSG
+
+  if [ ! -e $BASE ]; then
+    MSG="Updating $2" && echo $MSG && logger -t $ME $MSG
+
+    wget -q -nv -O $BASE $URL 
+
+    if [ ! -f $BASE ]; then
+      MSG="Didn't download $URL properly.  Where is $BASE?" && echo $MSG && logger -t $ME $MSG
+      exit 1	
+    fi
+
+    if [ -d "$3" ]; then
+      if [ -d old.$3 ]; then
+        rm -rf old.$3
+      fi
+       mv $3 old.$3
+    fi
+
+    mkdir $3
+    cd $3
+    tar -xzvf ../$BASE --strip-components 1
+
+    MSG="Installed OK" && echo $MSG && logger -t $ME $MSG
+  else
+    MSG="Latest version already exists locally" && echo $MSG && logger -t $ME $MSG
+  fi
+}
+
+function get_download_url () {
+	wget -q -nv -O- https://api.github.com/repos/$1/$2/releases/latest 2>/dev/null |  jq -r '.assets[] | select(.browser_download_url | contains("linux")) | .browser_download_url'
+}
+
+install_binary turtlecoin turtlecoin turtlecoin
+
+MSG="Install/Update script has completed" && echo $MSG && logger -t $ME $MSG
