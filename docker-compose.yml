@@ -1,0 +1,15 @@
+version: '3.3'
+
+services:
+  turtlecoind:
+    image: turtlecoin-release
+    container_name: turtlecoind
+    restart: always
+    expose:
+      - "11898"
+      - "11899"
+    volumes:
+      - type: volume
+        source: turtlecoin-data
+        target: /data
+    entrypoint: /turtlecoin/TurtleCoind --data-dir=/data --rpc-bind-ip=0.0.0.0 --p2p-bind-ip=0.0.0.0 --fee-address TRTLuxqfDys1pfQ1omkHMVViY4sFh6My5Ff3HBY8XPp3cJBkEfD7romVyzKug3mb9NNR4A8kEjZxZ9CHUgWckBSpPfbxnWAQUGL --fee-amount 90

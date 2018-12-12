@@ -1,0 +1,6 @@
+#!/bin/bash
+ME=${0##*/}
+
+MSG="Stopping and removing Docker container.." && echo $MSG && logger -t $ME $MSG
+docker stop turtlecoind
+docker rm turtlecoind

@@ -1,0 +1,9 @@
+#!/bin/bash
+ME=${0##*/}
+
+#This script can be run to start TurtleCoind in your generated docker container with whatever options you like
+
+TRTLCMD="--data-dir=/data --load-checkpoints=/turtlecoin/checkpoints.csv --rpc-bind-ip=0.0.0.0 --p2p-bind-ip 0.0.0.0 --fee-amount 40 --fee-address TRTLuxqfDys1pfQ1omkHMVViY4sFh6My5Ff3HBY8XPp3cJBkEfD7romVyzKug3mb9NNR4A8kEjZxZ9CHUgWckBSpPfbxnWAQUGL"
+BSHCMD="/turtlecoin/TurtleCoind"
+MSG="Using command $BSHCMD $TRTLCMD" && echo $MSG && logger -t $ME "$MSG"
+./run_detached_docker "$BSHCMD $TRTLCMD"

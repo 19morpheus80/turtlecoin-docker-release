@@ -1,0 +1,5 @@
+#!/bin/bash
+ME=${0##*/}
+
+MSG="Starting Docker container as service in the background.." && echo $MSG && logger -t $ME $MSG
+docker run -dit -p 11898:11898 -p 11897:11897 --name turtlecoind --restart unless-stopped --mount source=turtlecoin-data,target=/data turtlecoin-release $1
