@@ -15,7 +15,14 @@ At present it goes like:
 
 1. ./docker_prep
 2. ./installupdate_docker
-3. ./run_detached_docker "/turtlecoin/TurtleCoind --data-dir=/data --load-checkpoints=/turtlecoin/checkpoints.csv"
+3. edit your start_public_node script
+4. ./start_public_node
+
+Use `docker logs --tail 20 --follow turtlecoind` to see the logs.
+
+5. ./installupdate_docker at any time to update the binaries
+6. ./stop_public_node to stop the service
+7. ./start_public_node restarts an updated docker image
 
 Cheers,
 
