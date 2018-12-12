@@ -8,7 +8,7 @@ Dockerfile                  - to build the docker image
 docker_prep                 - updates your system using apt, then installs docker and adds your current user to the docker group
 installupdate_docker        - script downloads the latest turtlecoin binary release from github and (re)builds the docker image with it
 install_update_git_release  - script called by installupdate_docker (grabs the latest release from github)
-run_background_docker       - runs the docker image non-interactively.  probably shouldn't be used
+run_detached_docker         - runs the docker image non-interactively.  this is the one for running the daemon
 run_interactive_docker      - runs the docker image interactively.  could be useful for having a look around
 
 At present it goes like:
